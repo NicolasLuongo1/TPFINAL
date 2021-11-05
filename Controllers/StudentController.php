@@ -9,12 +9,12 @@
     use DAO\EmpresaDAO as EmpresaDAO;
      use Exception;
      use Alert;
-    use Models\Empresa;
+
 
 class StudentController
     {
         private $studentDAO;
-        private $empresaDAO;
+   
 
         public function __construct()
         {
@@ -282,8 +282,12 @@ class StudentController
                             $student->setEmail($valuesArray['email']);
                             $student->setPhoneNumber($valuesArray['phoneNumber']);
                             $student->setActive($valuesArray['active']);
-    
-                            $this->studentDAO->AddwithPassword($student,$password);
+                            
+
+                            $student->setPasword($password); // le seteo la password del form de register
+                            $student->setRole('user'); // aca le agrego por defecto que este sera un rol de tipo usuario
+
+                            $this->studentDAO->Add($student);
                             $this->ShowPerfilView($student);
                         }
                         else if($email== 'matiastesoriero@gmail.com'){

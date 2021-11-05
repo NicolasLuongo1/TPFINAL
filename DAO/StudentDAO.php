@@ -17,8 +17,8 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (studentId, careerId, firstName, lastName, dni, phoneNumber, gender, birthDate, email, activo, fileNumber) 
-                VALUES (:studentId, :careerId, :firstName, :lastName, :dni, :phoneNumber, :gender, :birthDate, :email, :activo, :fileNumber);";
+                $query = "INSERT INTO ".$this->tableName." (studentId, careerId, firstName, lastName, dni, phoneNumber, gender, birthDate, email, activo, fileNumber,passwordS,roles) 
+                VALUES (:studentId, :careerId, :firstName, :lastName, :dni, :phoneNumber, :gender, :birthDate, :email, :activo, :fileNumber, :passwordS, :roles);";
                 $parameters["studentId"] = $student->getStudentId();
                 $parameters["careerId"] = $student->getCareerId();
                 $parameters["firstName"] = $student->getFirstName();
@@ -30,10 +30,12 @@
                 $parameters["email"] = $student->getEmail();
                 $parameters["activo"] = $student->getActive();
                 $parameters["fileNumber"] = $student->getFileNumber();
-                echo ($parameters["activo"]);
                 
-                echo "aaaaaaaaaa";
-                
+                // nuevo ==========================
+
+                $parameters["passwordS"]=$student->getPasword();
+                $parameters["roles"] = $student->getRole();
+
                 $this->connection = Connection::GetInstance();
             
                 
