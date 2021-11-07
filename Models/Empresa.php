@@ -2,7 +2,7 @@
 
 namespace Models;
 
-use User;
+use Models\User as User;
 
 class Empresa extends User
 {

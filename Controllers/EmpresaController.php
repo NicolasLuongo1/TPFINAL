@@ -51,20 +51,26 @@
             require_once(VIEWS_PATH."empresa-mod.php");
         }
 
-
-
-        public function Add($name, $countryOrigin, $direction,$description,$img)
+        public function RegisterEmpresa()
         {
-            $empresa = new Empresa();
-            $empresa->setName($name);
-            $empresa->setCountryOrigin($countryOrigin);
-            $empresa->setDirection($direction);
-            $empresa->setDescription($description);
-            $empresa->setImg($img);
-
-            $this->EmpresaDAO->Add($empresa);
-            $this->ShowAddView();
+            require_once(VIEWS_PATH."registerCompany.php");
         }
+
+
+
+        // public function Add($name, $countryOrigin, $direction,$description,$img)
+        // {
+        //     $empresa = new Empresa();
+        //     $empresa->setName($name);
+
+        //     // $empresa->setCountryOrigin($countryOrigin);
+        //     // $empresa->setDirection($direction);
+        //     // $empresa->setDescription($description);
+        //     // $empresa->setImg($img);
+
+        //     $this->EmpresaDAO->Add($empresa);
+        //     $this->ShowAddView();
+        // }
 
         public function empresaValidation($nameEmpresa){
      
@@ -160,6 +166,42 @@
             $this->EmpresaDAO->ModifyData($empresaList);
             $this->ShowListView();
         }
+
+
+
+        public function bringEmpresaRegister($email,$password,$name){
+            
+            // hacer la verificacion para que no pueda registrarse dos veces la misma empresa 
+
+                  
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                $name = $_POST['name'];
+          
+
+                $empresa = new empresa();
+
+                $empresa->setEmail($email);
+                $empresa->setPasword($password);
+                $empresa->setName($name);
+                $empresa->setRole('Company');
+                
+
+
+                      $this->EmpresaDAO->add($empresa);
+                        $this->ShowPerfilEmpresaViewActual($empresa);
+                    }
+                   
+                    
+                    
+                
+
+
+
+        
+
+
+
 
     }
 ?>

@@ -24,10 +24,13 @@ include('header.php');
                </div>
 
 
+
                <button class="btn btn-primary btn-block btn-lg" type="submit">Iniciar Sesión</button>
        
-               <button class="btn btn-primary btn-block btn-lg " type="button" role="link" onclick="window.location='<?php echo FRONT_ROOT ?>student/register'"> Registrarse</button>
-               
+               <button class="btn btn-primary btn-block btn-lg " type="button" role="link" onclick="window.location='<?php echo FRONT_ROOT ?>student/register'"> Registrarme (alumno)</button>
+               <button class="btn btn-primary btn-block btn-lg " type="button" role="link" onclick="window.location='<?php echo FRONT_ROOT ?>empresa/RegisterEmpresa'"> Registrarme (empresa)</button>
+               <button class="btn btn-primary btn-block btn-lg " type="button" role="link" onclick="window.location='<?php echo FRONT_ROOT ?>Admin/RegisterAdmin2'"> Registrarme (Admin)</button>
+
           </form>
 
     

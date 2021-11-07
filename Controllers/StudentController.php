@@ -6,7 +6,6 @@
 
     use DAO\StudentDAO as StudentDAO;
     use Models\Student as Student;
-    use DAO\EmpresaDAO as EmpresaDAO;
      use Exception;
      use Alert;
 
@@ -19,12 +18,11 @@ class StudentController
         public function __construct()
         {
             $this->studentDAO = new StudentDAO();
-            $this->empresaDAO = new EmpresaDAO();
         }
 
         public function ShowAddView()
         {
-            require_once(VIEWS_PATH."student-add.php");
+            require_once(VIEWS_PATH."perfil-admin.php");
         }
 
         public function ShowListView()
@@ -187,7 +185,7 @@ class StudentController
                 $email = $_POST['email'];
                 $password = $_POST['password'];
 
-
+                // aca con el email deberiamos recorrer la tabla de admin, de company y ver si existe ese email, si no existe recorremos la api y seguimos con lo de abajo
 
                 foreach($arrayToDecode as $valuesArray){
 
@@ -227,9 +225,12 @@ class StudentController
             }
 
 
+            // esta funcion lo que hace es validar si el mail existe en la api, y si existe guarda el alumno con los datos de la api, mas la contraseña y le agrega el rol de students
 
             public function bringValidationRegister($email,$password){
             
+
+                
            
                 $ch = CURL_INIT();
     
@@ -247,28 +248,20 @@ class StudentController
                 
                 $arrayToDecode = json_decode($response,true);
                
-                $student=new Student();
-    
-    
-                // Si la persona presiona iniciar sesion el metodo es POST
-    
-                if($_POST){ 
-    
-    
+            
+              
     
                     $email = $_POST['email'];
                     $password = $_POST['password'];
-    
+              
+                    $student= null;
     
     
                     foreach($arrayToDecode as $valuesArray){
                         
-
                     
                         if($valuesArray['email'] == $email){
-    
-    
-                          //  $this->studentDAO->buscoEmailPasw($email,$password);
+
     
                             $student= new Student();
                             $student->setStudentId($valuesArray['studentId']);
@@ -284,6 +277,7 @@ class StudentController
                             $student->setActive($valuesArray['active']);
                             
 
+
                             $student->setPasword($password); // le seteo la password del form de register
                             $student->setRole('user'); // aca le agrego por defecto que este sera un rol de tipo usuario
 
@@ -295,12 +289,18 @@ class StudentController
                             echo "Error ese mail ya existe<br>";
                         }
                         
-                        else {
-                            $this->ShowLoginView(); // si esta mal me dirije al index otra vez
-                        }
+                        
                     }
+
+                    
+                    if($student==null){
+                        $this->ShowLoginView(); // si esta mal me dirije al index otra vez
+                    }
+
+                    
+                    
     
-                }
+                
     
                    
                     
@@ -309,53 +309,6 @@ class StudentController
                 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            public function AddwithPassword($studentId,$careerId, $firstName, $lastName,$dni,$phoneNumber,$gender,$birthDate,$email,$active,$fileNumber,$password)
-        {
-            // $alert = new Alert("","");
-
-            try{
-
-                
-                $student = new Student();
-                $student->setStudentId($studentId);
-                $student->setCareerId($careerId);
-                $student->setfirstName($firstName);
-                $student->setLastName($lastName);
-                $student->setDni($dni);
-                $student->setPhoneNumber($phoneNumber);
-                $student->setGender($gender);
-                $student->setBirthDate($birthDate);
-                $student->setEmail($email);
-                $student->setActive($active);
-                $student->setFilenumber($fileNumber);
-
-                //$this->studentDAO->Add($student);
-
-                $this->studentDAO->AddwithPassword($student,$password);
-            }catch(Exception $ex){
-                // $alert->setType("danger");
-                // $alert->setMessage($ex->getMessage());
-            }finally{
-                $this->ShowPerfilView($student);
-            }
-        }
         }
 
         
