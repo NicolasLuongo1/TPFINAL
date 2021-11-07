@@ -4,15 +4,24 @@
     namespace Controllers;
 
     use DAO\EmpresaDAO as EmpresaDAO;
-    use Models\Empresa as Empresa;
+    use DAO\StudentDAO as StudentDAO;
+    use DAO\AdminDAO as AdminDAO;
+
+
+
+use Models\Empresa as Empresa;
 
     class EmpresaController
     {
         private $EmpresaDAO;
+        private $StudentDAO;
+        private $AdminDAO;
 
         public function __construct()
         {
             $this->EmpresaDAO = new EmpresaDAO();
+            $this->StudentDAO = new StudentDAO();
+            $this->AdminDAO = new AdminDAO();
         }
 
         public function ShowAddView()
@@ -171,9 +180,34 @@
 
         public function bringEmpresaRegister($email,$password,$name){
             
-            // hacer la verificacion para que no pueda registrarse dos veces la misma empresa 
+            // hacer la verificacion para que no pueda registrarse dos veces la misma empresa ni con un email existente
 
-                  
+            if($this->AdminDAO->AdminExist($email)){
+
+                echo "el mail ya existe lo tiene un admin<br>";
+
+            }
+
+            else if($this->StudentDAO->studentExistRegister($email)){
+
+
+                echo "el mail ya existe lo tiene un student<br>";
+
+            }
+
+            else{
+
+                if($this->EmpresaDAO->CompanyExist($email)){
+
+                    echo "ese mail ya existe en una empresa";
+
+                }
+
+
+
+                else{
+
+                            
                 $email = $_POST['email'];
                 $password = $_POST['password'];
                 $name = $_POST['name'];
@@ -190,6 +224,13 @@
 
                       $this->EmpresaDAO->add($empresa);
                         $this->ShowPerfilEmpresaViewActual($empresa);
+
+                }
+                
+
+            }
+
+          
                     }
                    
                     

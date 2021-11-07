@@ -45,22 +45,55 @@ use DAO\Connection as Connection;
 
         // reveer porque no funciona ===========================
 
-        public function CompanyExist(Empresa $empresa){
+        public function CompanyExist($email){
+ 
+            try{
+     
+            $query = "SELECT * FROM ".$this->tableName. " WHERE email"."=".":email";
 
-            $query2 = "SELECT EXISTS (SELECT *FROM $this->tableName where email = $empresa->getEmail());";
-            echo $query2;
 
+            $parameters["email"]=$email;
             $this->connection = Connection::GetInstance();
-        
-            
-            $this->connection->ExecuteNonQuery($query2);
 
 
-                echo "hola existe<br>";
+            return $this->connection->Execute($query,$parameters);
 
 
-
+            }catch(Exception $ex){
+                throw $ex;
+            }
         }
+
+
+
+        public function CompanyExistSession($email,$pasword){
+ 
+  
+
+            try{
+                $query = "SELECT * FROM ". $this->tableName. " WHERE email "." =".":email"." and "." passwordS". "= ".":passwordS";
+
+
+
+            $parameters["email"]=$email;
+            $parameters["passwordS"]=$pasword;
+            $this->connection = Connection::GetInstance();
+
+
+            return $this->connection->Execute($query,$parameters);
+
+
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        }
+
+
+
+
+
+
+
 
         public function RemoveData($index){
             $this->RetrieveData();

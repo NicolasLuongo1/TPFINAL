@@ -11,7 +11,7 @@ include('header.php');
                <img src="https://mdp.utn.edu.ar/wp-content/uploads/2021/02/UTN_IsoLogoBcoNeg.png" alt="" width="440" height="160" class="pt 5">
           </header>
 
-         <form action="<?php echo FRONT_ROOT ?>student/bringValidation" method="POST" class="login-form bg-dark-alpha p-5 bg-light shadow"> 
+         <form action="<?php echo FRONT_ROOT ?>Sessionuser/SessionLoguin" method="POST" class="login-form bg-dark-alpha p-5 bg-light shadow"> 
                <div class="form-group">
                     <label for="">Email</label>
                     <input type="text" name="email" class="form-control form-control-lg" placeholder="Ingresar usuario" required>
