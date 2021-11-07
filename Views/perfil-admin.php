@@ -64,7 +64,7 @@
                             <label for="nombre" class= "col-4">Nombre</label>
                             <div class="col-8">
                                 <!-- <input type="text" class="form-control" value=""> -->
-                                <label for=""><?php echo $Admin->getName()?></label>
+                                <label for=""><?php echo $admin->getName()?></label>
                             </div>
                         </div>
 
@@ -77,7 +77,7 @@
                         <div class="form-group row">
                             <label for="email" class="col-4">Email</label>
                             <div class="col-8">
-                            <label for=""><?php echo $Admin->getEmail()?></label>
+                            <label for=""><?php echo $admin->getEmail()?></label>
                             </div>
                         </div>
 

@@ -3,17 +3,23 @@
 namespace Controllers;
 
 use DAO\AdminDAO;
+use DAO\EmpresaDAO;
+use DAO\StudentDAO;
 use Models\Admin;
 
 class AdminController{
 
 
     private $AdminDAO;
+    private $empresaDAO;
+    private $studentDAO;
 
 
     public function __construct()
     {
         $this->AdminDAO = new AdminDAO();
+        $this->empresaDAO = new EmpresaDAO();
+        $this->studentDAO = new StudentDAO();
         
     }
 
@@ -47,20 +53,17 @@ class AdminController{
 public function AdminValidation($email,$password){
 
 
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    if($this->AdminDAO->AdminExistSession($email,$password)){
 
 
-    $admin = new Admin(); // seguro hay que borrar esto, lo hago para evitar que tire errores
-
-    if(null){ //aca lo que hago es ver si ese email y contraseña existen en la base de datos y de ser asi inicio la sesion
-
-        $this->showPerfilAdmin($admin);
+        return true;
 
     }
+    else{
+        return false;
+    }
 
-
-
+  
 
 }
 
@@ -70,41 +73,51 @@ public function AdminValidation($email,$password){
 
     public function registerAdmin($email,$password,$name){
         
-        echo "entre a register admin<br>";
-     
 
-        if($this->AdminDAO->AdminExist($email) == false){
+        if($this->empresaDAO->CompanyExist($email)){
 
-
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $name = $_POST['name'];
-
-        $Admin = new Admin();
-
-        $Admin->setEmail($email);
-        $Admin->setPasword($password);
-        $Admin->setName($name);
-        $Admin->setRole('Admin');
-        
-
-        $this->AdminDAO->add($Admin);
-
-                // $this->ShowPerfilEmpresaViewActual($Admin);  Esto aun no nesta hecho en AdminController
-
-
-
+            echo " ese mail lo tiene una empresa<br>";
 
         }
 
+        else if($this->studentDAO->studentExistRegister($email)){
+
+            echo " ese mail lo tiene un estudiante<br>";
+        }
+ 
         else{
-            echo "ya existe el admin<br>";
+
+            if($this->AdminDAO->AdminExist($email) == false){
+
+
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                $name = $_POST['name'];
+        
+                $Admin = new Admin();
+        
+                $Admin->setEmail($email);
+                $Admin->setPasword($password);
+                $Admin->setName($name);
+                $Admin->setRole('Admin');
+                
+        
+                $this->AdminDAO->add($Admin);
+        
+                    $this->showPerfilAdmin($Admin);  
+        
+        
+        
+        
+                }
+        
+                else{
+                    echo "ya existe el admin<br>";
+                }
+
         }
 
-
-   
-
-
+        
 
     }
 
