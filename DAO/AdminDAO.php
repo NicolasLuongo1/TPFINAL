@@ -79,6 +79,70 @@ public function AdminExist($email){
 
 }
 
+public function AdminExistSession($email,$password){
+
+
+
+    try
+    {
+
+        $query = "SELECT * FROM ". $this->tableName. " WHERE email "." =".":email"." and "." passwordS". "= ".":passwordS";
+
+        
+
+
+    // SELECT * FROM passwordStudent WHERE password = :password
+
+         $parameters["email"] = $email;
+         $parameters["passwordS"] = $password;
+
+        $this->connection = Connection::GetInstance();
+
+        $this->connection->Execute($query,$parameters);
+    
+        return ($this->connection->Execute($query,$parameters));
+
+    }
+    catch(Exception $ex)
+    {
+        throw $ex;
+    }
+
+
+}
+
+public function BringAdmin($email,$password){
+
+
+
+    try
+    {
+
+        $query = "SELECT * FROM ". $this->tableName. " WHERE email "." =".":email"." and "." passwordS". "= ".":passwordS";
+
+     
+
+
+    // SELECT * FROM passwordStudent WHERE password = :password
+    
+         $parameters["email"] = $email;
+         $parameters["passwordS"] = $password;
+
+        $this->connection = Connection::GetInstance();
+
+        $this->connection->Execute($query,$parameters);
+    
+        return ($this->connection->Execute($query,$parameters));
+
+    }
+    catch(Exception $ex)
+    {
+        throw $ex;
+    }
+
+
+}
+
 
 
 
