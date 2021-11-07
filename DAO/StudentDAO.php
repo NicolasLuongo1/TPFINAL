@@ -144,25 +144,44 @@
 
 
 
-        // public function buscoEmailPasw($email,$passwordS)   
-        // {
-        //     try
-        //     {
+        public function studentExist($email,$pasword)   
+        {
+            try
+            {
 
-        //     $query = "SELECT * FROM *WHERE emailS=".$email.",passwordS=".$passwordS.".$this->tableName2.";
+            $query = "SELECT * FROM ". $this->tableName. " WHERE email "." =".":email"." and "." passwordS". "= ".":passwordS";
+            
+                 $parameters["email"]=$email;
+                 $parameters["passwordS"]=$pasword;
+ 
+                 $this->connection = Connection::GetInstance();
+                return $this->connection->Execute($query,$parameters);
+                 
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
 
-        //         $this->connection = Connection::GetInstance();
-        //         $this->connection->Execute($query);
-        //         echo ($query);
-        //         var_dump($query);
+        public function studentExistRegister($email)   
+        {
+            try
+            {
 
-        //     }
-        //     catch(Exception $ex)
-        //     {
-        //         throw $ex;
-        //     }
-        // }
-
+            $query = "SELECT * FROM ". $this->tableName. " WHERE email "." =".":email";
+            
+                 $parameters["email"]=$email;
+ 
+                 $this->connection = Connection::GetInstance();
+                return $this->connection->Execute($query,$parameters);
+                 
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
 
 
 

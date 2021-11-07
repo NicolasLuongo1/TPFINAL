@@ -78,9 +78,30 @@ use DAO\Connection as Connection;
 
         public function GetAll()
         {
-            $this->RetrieveData();
+          
+            try
+            {   $empresaList = array();
 
-            return $this->empresaList;
+                $query = "SELECT * FROM ".$this->tableName;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $empresa = new Empresa();
+                    $empresa->setName($row["name"]);
+                    $empresa->setEmail($row["email"]);
+                    array_push($empresaList, $empresa);
+                }
+
+                return $empresaList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
 
         private function SaveData()
