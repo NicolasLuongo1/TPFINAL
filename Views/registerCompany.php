@@ -11,28 +11,7 @@ include('header.php');
                <img src="https://mdp.utn.edu.ar/wp-content/uploads/2021/02/UTN_IsoLogoBcoNeg.png" alt="" width="440" height="160" class="pt 5">
           </header>
 
-
-          <script type="text/javascript">
-function ConfirmCancel(){
-
-var respuesta =  confirm("estas seguro que desea cancelar?");
-
-if(respuesta == true){
-return true;
-
-}
-
-else {
-return false;
-
-}
-
-}
-
-</script>
-
-
-         <form action="<?php echo FRONT_ROOT ?>student/bringValidationRegister" method="POST" class="login-form bg-dark-alpha p-5 bg-light shadow"> 
+         <form action="<?php echo FRONT_ROOT ?>empresa/bringEmpresaRegister" method="POST" class="login-form bg-dark-alpha p-5 bg-light shadow"> 
                <div class="form-group">
                     <label for="">Ingrese un Email</label>
                     <input type="text" name="email" class="form-control form-control-lg" placeholder="Ingresar usuario" required>
@@ -41,13 +20,17 @@ return false;
 
                <div class="form-group">
                     <label for=""> Ingrese una Contraseña</label>
-                    <input type="password" name="password" class="form-control form-control-lg" placeholder="Ingresar constraseña" required>
+                    <input type="password" name="password" class="form-control form-control-lg" placeholder="Ingresar contraseña" required>
+               </div>
+
+               <div class="form-group">
+                    <label for=""> Nombre de empresa</label>
+                    <input type="text" name="name" class="form-control form-control-lg" placeholder="Ingresar nombre" required>
                </div>
 
 
                <button class="btn btn-primary btn-block btn-lg" type="submit">Aceptar</button>
-              <td> <a href="student/ShowLoginView"></a> <button class="btn btn-primary btn-block btn-lg" type="cancel" onclick="return ConfirmCancel()" >Cancelar</button></td>
-               
+               <button class="btn btn-primary btn-block btn-lg" type="cancel" onclick="javascript:window.location='<?php echo FRONT_ROOT ?>student/ShowLoginView';" >Cancelar</button>
                
                
           </form>

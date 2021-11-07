@@ -79,7 +79,7 @@
                             <label for=""> <?php echo $empresa->getName() ?></label>
                             
 
-                                <label for=""></label>
+                                <!-- <label for=""></label>
                             </div>
                         </div>
 
@@ -108,7 +108,7 @@
                             <div class="col-8">
                             <label for=""><?php echo $empresa->getDescription() ?></label>
                             </div>
-                        </div>
+                        </div> -->
 
                         <hr style="color: #0056b2;" />
                        

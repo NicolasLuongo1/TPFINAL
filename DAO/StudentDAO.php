@@ -11,7 +11,7 @@
     {
         private $connection;
         private $tableName = "students";
-        private $tableName2 = "passwordStudent";
+    
 
         public function Add(Student $student)
         {
@@ -50,8 +50,13 @@
 
         public function GetAll()
         {
+
+            
             try
             {
+
+              
+
                 $studentList = array();
 
                 $query = "SELECT * FROM ".$this->tableName;
