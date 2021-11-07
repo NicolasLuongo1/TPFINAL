@@ -55,17 +55,11 @@ public function GetAll()
 // o nulo en caso de no existir
 
 public function AdminExist($email){
-
-
-    echo "entre a register admin existe<br>";
-
-    try
+     try
     {
 
     $query = "SELECT * FROM ".$this->tableName. " WHERE email"."=".":email";
 
-        var_dump($query);
-    echo "hago la query<br>";
 
     // SELECT * FROM passwordStudent WHERE password = :password
          $parameters["email"] = $email;
